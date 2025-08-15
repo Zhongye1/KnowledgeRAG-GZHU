@@ -1,12 +1,54 @@
 ## This is @RAGF-01
 
+描述：（待补充
+
 ---
 
+## 前端
+
+一个基于 Vue 3 和 TDesign 组件库开发的前端，主要提供处理文档解析，知识库管理，知识图谱生成，RAG 检索，Ollama 服务管理，智能问答的UI界面
+
+- **前端框架**：Vue 3 + TypeScript
+- **UI 组件库**：TDesign Vue Next
+- **构建工具**：Vite
+- **CSS 框架**：Tailwind CSS
+
+### 运行（前端）
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+```
 
 
 
+## 后端
 
+基于 FastAPI  提供服务的 RAG (检索增强生成) 后端服务，用于处理文档解析，知识库管理，知识图谱生成，RAG 检索，向量存储，Ollama 服务管理，智能问答。
 
+### 运行（后端）
+
+```bash
+# 创建虚拟环境
+python -m venv venv
+# 激活虚拟环境
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+#启动fastapi服务
+python main.py --host 0.0.0.0 --port 8000 --reload
+```
 
 
 
@@ -62,7 +104,7 @@
                 <br />
                 <em>GitHub: <a href="https://github.com/HJX">@HJX</a></em>
                 <br />
-                Contributions: 友情客串
+                Contributions: 
             </a>
         </td>
         <td align="center" valign="top">
@@ -79,6 +121,11 @@
     </tr>
 </table>
 
+
+
+## 详细介绍
+
+讲一下前后端技术栈，代码结构，架构（最好画图），各页面各功能各接口
 
 
 
