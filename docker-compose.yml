@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   asf-backend:
-    build: ./ASFbackend
+    build: ./RagBackend
     container_name: asf-backend
     ports:
       - "8000:8000"
@@ -12,7 +12,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend_ASF
+      context: ./frontend_ASF #npm run build后dist文件夹放这里
       dockerfile: Dockerfile
     container_name: asf-frontend
     ports:
