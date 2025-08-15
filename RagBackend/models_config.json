@@ -1,0 +1,6 @@
+{
+    "llm_model": "llama2",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "rerank_model": "bge-large",
+    "kg_model": "qwen3:0.6b"
+}
