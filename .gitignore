@@ -1,6 +1,5 @@
-assets/
+
 dist/
-*.sql
 *.log
 *.pyc
 *.pyo
