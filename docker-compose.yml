@@ -24,17 +24,13 @@ services:
     container_name: ragf-redis
     restart: unless-stopped
     command: >
-      redis-server
-      --save 60 1
-      --loglevel warning
-      --maxmemory 128mb
-      --maxmemory-policy allkeys-lru
+      redis-server --save 60 1 --loglevel warning --maxmemory 128mb --maxmemory-policy allkeys-lru
     ports:
-      - "6380:6379"    # 宿主机用 6380 避免与本地 Redis 冲突
+      - "6380:6379" # 宿主机用 6380 避免与本地 Redis 冲突
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -53,7 +49,7 @@ services:
       MYSQL_CHARSET: utf8mb4
       MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
-      - "3307:3306"          # 宿主机用 3307 避免与本地 MySQL 冲突
+      - "3307:3306" # 宿主机用 3307 避免与本地 MySQL 冲突
     volumes:
       - mysql_data:/var/lib/mysql
       - ./RagBackend/docs/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -62,7 +58,7 @@ services:
         limits:
           memory: 512m
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-Www028820}"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-Www028820}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -76,13 +72,13 @@ services:
     container_name: ragf-ollama
     restart: unless-stopped
     ports:
-      - "11435:11434"    # 11435 on host -> 11434 in container (avoids conflict with local Ollama)
+      - "11435:11434" # 11435 on host -> 11434 in container (avoids conflict with local Ollama)
     volumes:
       - ollama_data:/root/.ollama
     deploy:
       resources:
         limits:
-          memory: 2g      # qwen2:0.5b 约需 600MB，留余量
+          memory: 2g # qwen2:0.5b 约需 600MB，留余量
     # GPU 加速（有 NVIDIA GPU 时取消注释）
     # deploy:
     #   resources:
@@ -92,7 +88,7 @@ services:
     #           count: all
     #           capabilities: [gpu]
     healthcheck:
-      test: ["CMD", "ollama", "list"]
+      test: [ "CMD", "ollama", "list" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -179,10 +175,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1500m   # 主服务：优先保障上传接口和 RAG 问答
+          memory: 1500m # 主服务：优先保障上传接口和 RAG 问答
           cpus: "1.0"
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -201,10 +197,7 @@ services:
     container_name: ragf-worker
     # Worker 启动命令：直接运行 Worker 入口，不启动 HTTP 服务器
     command: >
-      python -c "
-      import asyncio, logging
-      logging.basicConfig(level=logging.INFO)
-      async def main():
+      python -c " import asyncio, logging logging.basicConfig(level=logging.INFO) async def main():
           from document_processing.vectorize_task import register_all
           register_all()
           from document_processing.task_queue import ensure_worker_started, _redis_worker
@@ -214,8 +207,7 @@ services:
           await ensure_worker_started()
           # 永久保持运行
           await asyncio.Event().wait()
-      asyncio.run(main())
-      "
+      asyncio.run(main()) "
     restart: unless-stopped
     depends_on:
       redis:
@@ -247,7 +239,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2000m   # Worker 需要更多内存用于向量化模型推理
+          memory: 2000m # Worker 需要更多内存用于向量化模型推理
           cpus: "1.5"
     networks:
       - ragf-net
@@ -267,7 +259,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 64m     # Nginx 极低内存占用
+          memory: 64m # Nginx 极低内存占用
     networks:
       - ragf-net
 

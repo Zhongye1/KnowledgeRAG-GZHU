@@ -9,6 +9,7 @@ dependencies = [
     "beautifulsoup4==4.13.4",
     "camelot-py==0.11.0",
     "docx2txt>=0.9",
+    "dotenv>=0.9.9",
     "faiss-cpu>=1.12.0",
     "fastapi==0.116.1",
     "google-api-python-client==2.109.0",
@@ -33,4 +34,41 @@ dependencies = [
     "requests==2.32.4",
     "sentence-transformers>=5.1.0",
     "uvicorn==0.35.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "ASF_SRE",
+    "RAGF_User_Management",
+    "RAG_M",
+    "agent_tools",
+    "assets",
+    "audit",
+    "billing",
+    "chat_units",
+    "creation",
+    "data_sources",
+    "docs",
+    "document_processing",
+    "enterprise",
+    "evaluation",
+    "feedback",
+    "integrations",
+    "knowledge",
+    "knowledge_base",
+    "knowledge_graph",
+    "models",
+    "monitoring",
+    "multi_model",
+    "multimodal",
+    "ollama_management",
+    "open_api",
+    "rag_enhancement",
+    "search",
+    "square",
+    "tests"
 ]

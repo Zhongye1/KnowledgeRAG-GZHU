@@ -9,7 +9,7 @@ __pycache__/
 *.egg
 .pytest_cache/
 .mypy_cache/
-.ruff_cache/
+.ruff_cache
 
 # ── Node / Frontend ──────────────────────────────────────────────
 node_modules/
